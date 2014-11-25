@@ -8,3 +8,4 @@ planos-new-grailsPlugins.iml
 .idea
 web-app/partials/node_modules
 web-app/partials/bower_components
+out
