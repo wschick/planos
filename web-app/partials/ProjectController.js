@@ -126,7 +126,10 @@ projectController.controller("ProjectController",["$scope","notifiedResource", "
 
 
         $scope.handleQualitativeEvaluation = function(id){
-
+            QualitativeEvaluation.get({id:id},function(evaluation){
+                if (evaluation.project.id == $scope.project.id)
+                    $scope.updateQualitativeEvaluation(evaluation)
+            });
         }
 
 
@@ -144,18 +147,7 @@ projectController.controller("ProjectController",["$scope","notifiedResource", "
 
 
 
-        var qualitattiveEvaluationSubscription = QualitativeEvaluation.subscribe(function(data){
-                data = JSON.parse(data.body);
 
-
-                var evaluation = QualitativeEvaluation.get({id:data.id},function(){
-                    if (evaluation.project.id == $scope.project.id)
-                        $scope.updateQualitativeEvaluation(evaluation)
-                });
-
-            }
-
-        )
 
         var quantEvaluationSubscription = QuantitativeEvaluation.subscribe(function(data){
                 data = JSON.parse(data.body);
@@ -175,7 +167,6 @@ projectController.controller("ProjectController",["$scope","notifiedResource", "
 
 
             quantEvaluationSubscription.unsubscribe();
-            qualitattiveEvaluationSubscription.unsubscribe();
         });
 
 

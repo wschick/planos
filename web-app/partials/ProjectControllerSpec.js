@@ -637,7 +637,7 @@ describe("ProjectController",function(){
                 it ("should subscribe to project onUpdate",function(){
                     createController();
 
-                    expect(notifiedResource("qualitativeEvaluation with handleQualitativeEvaluation").onUpdate).toHaveBeenCalledWith(scope.handleQualitativeEvaluation);
+                    expect(notifiedResource("qualitativeEvaluation").onUpdate).toHaveBeenCalledWith(scope.handleQualitativeEvaluation);
                 })
 
                 it ("should subscribe to project onCreate with handleQualitativeEvaluation",function(){
@@ -647,7 +647,64 @@ describe("ProjectController",function(){
                 })
 
                 describe("handleQualitativeEvaluation",function(){
-                    it ("should call ")
+
+                    var callback = null
+
+                    beforeEach(function(){
+                        createController()
+                    })
+                    it ("should fetch the evaluation",function(){
+                        scope.handleQualitativeEvaluation(1234)
+
+                        expect(notifiedResource("qualitativeEvaluation").get).toHaveBeenCalledWith({id:1234},jasmine.any(Function))
+                    })
+
+                    it("should fetch the evaluation with a callback that calls updateQualitativeEvaluation if the evaluation project.id equals the scope project id",function(){
+                        notifiedResource("qualitativeEvaluation").get.and.callFake(function(data,c){
+                            callback = c
+                        })
+
+                        spyOn(scope,"updateQualitativeEvaluation")
+
+                        scope.project.id = 456
+                        scope.handleQualitativeEvaluation(1234);
+
+                        var evaluation = {
+                            project:{
+                                id:456
+                            }
+                        }
+
+                        callback(evaluation)
+
+                        expect(scope.updateQualitativeEvaluation).toHaveBeenCalledWith(evaluation)
+
+
+                    })
+
+                    it("should fetch the evaluation with a callback that does not call updateQualitativeEvaluation if the evaluation project.id does not equal the scope project id",function(){
+                        notifiedResource("qualitativeEvaluation").get.and.callFake(function(data,c){
+                            callback = c
+                        })
+
+                        spyOn(scope,"updateQualitativeEvaluation")
+
+                        scope.project.id = 567
+
+                        scope.handleQualitativeEvaluation(1234);
+
+                        var evaluation = {
+                            project:{
+                                id:456
+                            }
+                        }
+
+                        callback(evaluation)
+
+                        expect(scope.updateQualitativeEvaluation).not.toHaveBeenCalled()
+
+
+                    })
                 })
 
             })
