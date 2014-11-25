@@ -1,7 +1,9 @@
 
 ##Data model
 
-![data](logo11w.png)
+Here is a diagram of the model
+
+![data](model.png)
 
 ##REST + STOMP notifications
 
@@ -21,7 +23,7 @@ modified or created resource, eg:
     {id:123,action:"PUT"}
     
 
-##Architecture
+###Architecture
 
     -----------------------------------
     |        Client (Angularjs)       |

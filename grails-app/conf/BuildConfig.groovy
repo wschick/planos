@@ -69,6 +69,8 @@ grails.project.dependency.resolution = {
 
         compile ":spring-websocket:1.2.0"
 
+        compile ":class-domain-uml:0.1.5"
+
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.9.0"
         //compile ":less-asset-pipeline:1.10.0"
