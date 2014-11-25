@@ -1,0 +1,25 @@
+
+<div ng-repeat="portfolio in portfolios">
+<div class="col-md-4"
+     data-drop="true"
+     data-jqyoui-options
+     ng-model="portfolio.projects"
+     jqyoui-droppable="{multiple:true,stack:true,onDrop:'moveProjectToPortfolio(portfolio)'}"
+     data-drag="false" >
+    <h3 class="page-header"><a href="#/portfolio/{{portfolio.id}}">{{portfolio.name}}</a></h3>
+    <div ng-repeat="project in portfolio.projects">
+    <div data-drag="true"
+         data-drop="false"
+
+         ng-model="portfolio.projects"
+
+
+         jqyoui-draggable="{animate:true,index:{{$index}},placeholder :false}"
+
+         class="alert alert-info" ng-if="project"><a href="#/projects/{{project.id}}">{{project.name}}</a><p>Number of evaluations: {{project.qualitativeEvaluation.length + project.quantitativeEvaluation.length}}</p></div>
+    </div>
+</div>
+</div>
+
+
+

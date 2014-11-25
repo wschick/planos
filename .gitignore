@@ -1,0 +1,10 @@
+# Created by .gitignore support plugin (hsz.mobi)
+target
+wrapper
+planos-new.iml
+.classpath
+.project
+planos-new-grailsPlugins.iml
+.idea
+web-app/partials/node_modules
+web-app/partials/bower_components

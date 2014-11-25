@@ -1,0 +1,39 @@
+<div class="col-md-4">
+   <h2 class="page-header">{{project.name}}</h2>
+    <p>{{project.description}}</p>
+    <p>Created By: {{project.creator}}</p>
+    <p>In portfolio: {{project.portfolio.name}}</p>
+
+    <h3 class="page-header">
+        Evaluation
+    </h3>
+
+    <table class="table-striped table table-bordered">
+        <tr>
+            <td></td>
+            <th>Me ({{currentUser}})</th>
+            <th ng-repeat="user in users" ng-if="user != currentUser">{{user}}</th>
+        </tr>
+        <tr ng-repeat="qualitativeCriterion in qualitativeCriteria">
+            <th>{{qualitativeCriterion.name}}</th>
+            <td>
+                <select class="form-control" ng-model="qualitativeEvaluationsForUser[currentUser][qualitativeCriterion.id].qualitativeValue.id" ng-options="value.id as value.name for value in qualitativeCriterion.allowedQualitativeValues"></select>
+            </td>
+            <td ng-repeat="user in users" ng-if="user != currentUser">{{qualitativeEvaluationsForUser[user][qualitativeCriterion.id].qualitativeValue.name}}</td>
+        </tr>
+        <tr ng-repeat="quantitativeCriterion in quantitativeCriteria">
+            <th>{{quantitativeCriterion.name}}</th>
+            <td>
+                <input type="number" class="form-control" ng-model="quantitativeEvaluationsForUser[currentUser][quantitativeCriterion.id].value">
+            </td>
+            <td ng-repeat="user in users" ng-if="user != currentUser">{{quantitativeEvaluationsForUser[user][quantitativeCriterion.id].value}}</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td><button class="btn btn-success" ng-click="saveEvaluation()">Save</button></td>
+        </tr>
+
+    </table>
+
+</div>

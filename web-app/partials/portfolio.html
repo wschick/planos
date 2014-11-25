@@ -1,0 +1,14 @@
+
+    <h3 class="page-header">{{portfolio.name}}</h3>
+    <div ng-repeat="project in portfolio.projects">
+    <div
+
+         ng-model="portfolio.projects"
+
+
+         class="alert alert-info" ng-if="project"><a href="#/projects/{{project.id}}">{{project.name}}</a></div>
+    </div>
+
+
+
+
